@@ -52,11 +52,14 @@ span {
   }
 
   .card {
+    display: block;
     margin-bottom: 20px;
     width: 100%;
+    text-align: justify;
   }
 
   .tile-image {
     width: 100%;
+    object-fit: cover;
   }
 }
