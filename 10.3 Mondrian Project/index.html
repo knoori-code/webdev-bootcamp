@@ -19,14 +19,29 @@
     HINT: Remember you can't change the properties of grid lines.
     But grid lines are transparent!
     */
+    .outer-box {
+      display: flex;
+      height: 100vh;
+      width: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+ 
+    .container {
+      width: 748px;
+      height: 748px;
+      background-color: black;
+    }
   </style>
 </head>
 
 <body>
   <!-- Write your HTML here -->
-  <div class="container">
-    <div></div>
-    <div></div>
+  <div class="outer-box">
+    <div class="container">
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </body>
 
