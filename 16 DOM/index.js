@@ -1,2 +1,2 @@
 document.querySelector("h1").classList.toggle("huge");
-document.querySelector("ul").style.color = "red"
+document.querySelector("ul").style.color = "red";
