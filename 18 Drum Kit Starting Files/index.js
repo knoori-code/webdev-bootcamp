@@ -2,6 +2,7 @@ const listOfButtons = document.querySelectorAll(".drum");
 
 for (let button of listOfButtons) {
   button.addEventListener("click", function () {
-    alert("I got clicked!")
-  })
+    let audio = new Audio("sounds/tom-1.mp3");
+    audio.play();
+  });
 }
