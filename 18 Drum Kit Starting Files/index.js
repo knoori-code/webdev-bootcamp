@@ -15,6 +15,11 @@ for (let button of listOfButtons) {
         kickBass.play();
         break;
 
+      case "s":
+        const snare = new Audio("sounds/snare.mp3");
+        snare.play();
+        break;
+
       default:
         break;
     }
