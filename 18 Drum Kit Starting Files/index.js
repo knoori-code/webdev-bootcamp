@@ -41,7 +41,7 @@ for (let button of listOfButtons) {
         break;
 
       default:
-        break;
+        console.log(buttonInnerHTML);
     }
   });
 }
