@@ -20,6 +20,26 @@ for (let button of listOfButtons) {
         snare.play();
         break;
 
+      case "d":
+        const tom1 = new Audio("sounds/tom-1.mp3");
+        tom1.play();
+        break;
+
+      case "j":
+        const tom2 = new Audio("sounds/tom-2.mp3");
+        tom2.play();
+        break;
+
+      case "k":
+        const tom3 = new Audio("sounds/tom-3.mp3");
+        tom3.play();
+        break;
+
+      case "l":
+        const tom4 = new Audio("sounds/tom-4.mp3");
+        tom4.play();
+        break;
+
       default:
         break;
     }
