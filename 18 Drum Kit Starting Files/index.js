@@ -44,4 +44,21 @@ for (let button of listOfButtons) {
         console.log(buttonInnerHTML);
     }
   });
+
 }
+
+document.addEventListener("keydown", (event) => {
+  let keyPressed = event.key
+
+  switch (keyPressed) {
+    case "w":
+      const crash = new Audio("sounds/crash.mp3");
+      crash.play();
+      break;
+  
+    default:
+      break;
+  }
+
+  
+})
