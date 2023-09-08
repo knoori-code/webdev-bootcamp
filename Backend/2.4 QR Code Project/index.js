@@ -6,6 +6,7 @@
 
 import inquirer from "inquirer";
 import qr from "qr-image";
+import fs from 'fs'
 
 inquirer
   .prompt([
@@ -17,9 +18,15 @@ inquirer
   ])
   .then((answers) => {
     // Use user feedback for... whatever!!  Answer should be a website url. 
-    console.log(answers);
+    const url = answers.URL;
+    
+    var qr_svg = qr.image(url);
+    qr_svg.pipe(fs.createWriteStream('qr_image.svg'));
 
-    const qr_png = qr.image(answers.URL, { type: 'png' });
+    fs.writeFile("URL.txt", url, (err) => {
+      if (err) throw err;
+      console.log("The file has been saved!");
+    })
   })
   .catch((error) => {
     if (error.isTtyError) {
