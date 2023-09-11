@@ -18,7 +18,6 @@ app.get("/", (req, res) => {
 
 app.post("/submit", (req, res) => {
   let generatedName = req.body.street + req.body.pet;
-  console.log(generatedName);
   res.send(`<h1>Your band name is:</><h2>${generatedName}</>`);
 });
 
