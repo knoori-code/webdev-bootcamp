@@ -6,15 +6,18 @@ const port = 3000;
 app.get("/", (req, res) => {
   const date = new Date();
   let day = date.getDay();
-  let message = ""
+  let dayType = "";
+  let advice = "";
 
   if (day === 0 || day === 6) {
-    message = "Hey!  It's the weekend, it's time to have fun!"
+    dayType = "It's the weekend, ";
+    advice = "it's time to have fun!";
   } else {
-    message = "Hey!  It's a weekday, time to work hard!"
+    dayType = "It's a weekday, ";
+    advice = "time to work hard!";
   }
 
-  res.render("index.ejs", { message: message });
+  res.render("index.ejs", { dayType: dayType, advice: advice });
 });
 
 app.listen(port, () => {
