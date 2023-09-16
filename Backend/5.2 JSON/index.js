@@ -21,7 +21,7 @@ app.post("/recipe", (req, res) => {
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 
   const recipeObj = JSON.parse(recipeJSON);
-  console.log(recipeObj)
+  res.render("index.ejs", recipeObj);
 });
 
 app.listen(port, () => {
