@@ -29,7 +29,7 @@ app.post("/recipe", (req, res) => {
   const listOfToppings = [];
   const toppingsArray = recipeObj.ingredients.toppings;
   for (let topping of toppingsArray) {
-    listOfToppings.push(`${topping.quantity} ${topping.name}`)
+    listOfToppings.push(`${topping.quantity} of ${topping.name}`)
   }
 
   res.render("index.ejs", { recipeObj, listOfToppings });
