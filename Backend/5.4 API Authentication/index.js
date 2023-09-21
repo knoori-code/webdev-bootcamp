@@ -13,6 +13,7 @@ const yourBearerToken = "";
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { content: "API Response." });
+  console.log(res);
 });
 
 app.get("/noAuth", (req, res) => {
