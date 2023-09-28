@@ -42,6 +42,13 @@ app.get("/basicAuth", (req, res) => {
       },
     });
   */
+
+  const response = axios.get(API_URL + "all?page=2", {
+    auth: {
+      username: "knoori",
+      password: "CodingRocks",
+    },
+  });
 });
 
 app.get("/apiKey", (req, res) => {
