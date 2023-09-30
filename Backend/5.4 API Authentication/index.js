@@ -29,7 +29,7 @@ app.get("/noAuth", async (req, res) => {
   }
 });
 
-app.get("/basicAuth", (req, res) => {
+app.get("/basicAuth", async (req, res) => {
   //TODO 3: Write your code here to hit up the /all endpoint
   //Specify that you only want the secrets from page 2
   //HINT: This is how you can use axios to do basic auth:
@@ -42,19 +42,25 @@ app.get("/basicAuth", (req, res) => {
       },
     });
   */
+  try {
+    const response = await axios.get(API_URL + "all?page=2", {
+      auth: {
+        username: yourUsername,
+        password: yourPassword,
+      },
+    });
 
-  const response = axios.get(API_URL + "all?page=2", {
-    auth: {
-      username: "knoori",
-      password: "CodingRocks",
-    },
-  });
+    const stringResponse = JSON.stringify(response.data);
+    res.render("index.ejs", { content: stringResponse });
+  } catch (error) {}
 });
 
 app.get("/apiKey", (req, res) => {
   //TODO 4: Write your code here to hit up the /filter endpoint
   //Filter for all secrets with an embarassment score of 5 or greater
   //HINT: You need to provide a query parameter of apiKey in the request.
+
+  const response = axios.get(API_URL + "filter?score=5&apiKey=" + yourAPIKey);
 });
 
 app.get("/bearerToken", (req, res) => {
