@@ -11,3 +11,19 @@
 // secret and the username of the secret.
 
 // 6. Listen on your predefined port and start the server.
+
+import express from "express";
+import axios from "axios";
+
+const app = express();
+const port = 3000;
+app.use(express.static("public"));
+
+app.get("/", async (req, res) => {
+  const response = await axios.get("")
+  res.render("index.ejs", { secret, user });
+});
+
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
