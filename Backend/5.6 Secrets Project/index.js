@@ -20,8 +20,11 @@ const port = 3000;
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
-  const response = await axios.get("")
-  res.render("index.ejs", { secret, user });
+  const response = await axios.get("https://secrets-api.appbrewery.com/random");
+  res.render("index.ejs", {
+    secret: response.data.secret,
+    user: response.data.username,
+  });
 });
 
 app.listen(port, () => {
