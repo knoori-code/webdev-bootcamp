@@ -12,19 +12,26 @@ app.get("/random", (req, res) => {
   const randomIndex = Math.floor(Math.random() * jokes.length);
   const randomJoke = jokes[randomIndex];
   res.json(randomJoke);
-})
+});
 
 //2. GET a specific joke
 app.get("/jokes/:id", (req, res) => {
   const jokeId = Number(req.params.id);
   const specifiedJoke = jokes.find((joke) => {
-    return jokeId === joke.id; 
-  })
+    return jokeId === joke.id;
+  });
 
   res.json(specifiedJoke);
-})
+});
 
 //3. GET a jokes by filtering on the joke type
+app.get("/filter", (req, res) => {
+  const filteredJokes = jokes.filter((joke) => {
+    return joke.jokeType === req.query.type;
+  });
+
+  res.json(filteredJokes);
+});
 
 //4. POST a new joke
 
