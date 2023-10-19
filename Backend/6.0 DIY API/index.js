@@ -46,7 +46,7 @@ app.post("/jokes", (req, res) => {
 });
 
 //5. PUT a joke
-app.put("jokes/:id", (req, res) => {
+app.put("/jokes/:id", (req, res) => {
   const jokeId = Number(req.params.id);
 
   const changedJoke = {
