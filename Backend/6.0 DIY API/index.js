@@ -62,6 +62,21 @@ app.put("/jokes/:id", (req, res) => {
 });
 
 //6. PATCH a joke
+app.patch("/jokes/:id", (req, res) => {
+  const jokeId = Number(req.params.id);
+
+  const index = jokes.findIndex((joke) => joke.id === jokeId);
+  
+  if (req.body.text) {
+    jokes[index].jokeText = req.body.text;
+  }
+
+  if (req.body.type) {
+    jokes[index].jokeType = req.body.type;
+  }
+
+  res.json(jokes[index]);
+}) 
 
 //7. DELETE Specific joke
 
