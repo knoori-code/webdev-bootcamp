@@ -55,9 +55,10 @@ app.put("/jokes/:id", (req, res) => {
     jokeType: req.body.type,
   };
 
-  jokes[jokeId] = changedJoke;
+  jokes[jokeId - 1] = changedJoke;
 
   res.json(changedJoke);
+  console.log(jokes);
 });
 
 //6. PATCH a joke
