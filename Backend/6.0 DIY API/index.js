@@ -92,8 +92,6 @@ app.delete("/jokes/:id", (req, res) => {
       error: `Joke with id: ${jokeId} not found.  No jokes were deleted`,
     });
   }
-  
-  console.log("Jokes array: ", jokes);
 });
 
 //8. DELETE All jokes
