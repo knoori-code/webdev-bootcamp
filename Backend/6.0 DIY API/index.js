@@ -83,8 +83,17 @@ app.delete("/jokes/:id", (req, res) => {
   const jokeId = Number(req.params.id);
 
   const index = jokes.findIndex((joke) => joke.id === jokeId);
-  delete jokes[index];
-  res.send("Ok");
+
+  if (index !== -1) {
+    jokes.splice(index, 1);
+    res.sendStatus(200);
+  } else {
+    res.status(400).json({
+      error: `Joke with id: ${jokeId} not found.  No jokes were deleted`,
+    });
+  }
+  
+  console.log("Jokes array: ", jokes);
 });
 
 //8. DELETE All jokes
