@@ -95,6 +95,20 @@ app.delete("/jokes/:id", (req, res) => {
 });
 
 //8. DELETE All jokes
+app.delete("/all", (req, res) => {
+  const apiKey = req.query.key;
+
+  if (apiKey === masterKey) {
+    jokes = [];
+    res.sendStatus(200);
+  } else {
+    res
+      .status(400)
+      .json({ error: `You are not authorized to delete all jokes.` });
+  }
+
+  console.log("Jokes array: ", jokes);
+});
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
