@@ -79,6 +79,11 @@ app.patch("/jokes/:id", (req, res) => {
 }) 
 
 //7. DELETE Specific joke
+app.delete("/jokes/:id", (req, res) => {
+  const jokeId = Number(req.params.id);
+
+  
+})
 
 //8. DELETE All jokes
 
