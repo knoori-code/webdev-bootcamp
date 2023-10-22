@@ -60,7 +60,7 @@ app.post("/posts", (req, res) => {
     title: req.body.title,
     content: req.body.content,
     author: req.body.author,
-    date: Date()
+    date: Date(),
   };
 
   posts.push(newPost);
@@ -78,7 +78,7 @@ app.patch("/posts/:id", (req, res) => {
     title: req.body.title,
     content: req.body.content || originalPost.content,
     author: req.body.author,
-    date: Date()
+    date: Date(),
   };
 
   posts[id - 1] = newPost;
@@ -90,9 +90,11 @@ app.delete("/posts/:id", (req, res) => {
   const id = Number(req.params.id);
 
   const index = posts.findIndex((post) => post.id === id);
+  if (index === -1) return res.status(404).json({ message: "Post not found " });
+
   posts.splice(index, 1);
-  res.json({});
-})
+  res.json({ message: "Post deleted" });
+});
 
 app.listen(port, () => {
   console.log(`API is running at http://localhost:${port}`);
