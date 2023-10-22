@@ -64,9 +64,7 @@ app.post("/posts", (req, res) => {
   };
 
   posts.push(newPost);
-
-  // Just need a response to hit try block in server.js
-  res.json({});
+  res.json(posts);
 });
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
