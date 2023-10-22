@@ -82,7 +82,7 @@ app.patch("/posts/:id", (req, res) => {
   };
 
   posts[id - 1] = newPost;
-  res.json({});
+  res.json(posts);
 });
 
 //CHALLENGE 5: DELETE a specific post by providing the post id.
