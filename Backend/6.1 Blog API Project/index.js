@@ -88,7 +88,6 @@ app.patch("/posts/:id", (req, res) => {
 //CHALLENGE 5: DELETE a specific post by providing the post id.
 app.delete("/posts/:id", (req, res) => {
   const id = Number(req.params.id);
-
   const index = posts.findIndex((post) => post.id === id);
   if (index === -1) return res.status(404).json({ message: "Post not found " });
 
