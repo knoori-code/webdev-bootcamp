@@ -14,11 +14,7 @@ const db = new pg.Client({
 
 db.connect();
 
-let quiz = [
-  { country: "France", capital: "Paris" },
-  { country: "United Kingdom", capital: "London" },
-  { country: "United States of America", capital: "New York" },
-];
+let quiz = [];
 
 db.query("SELECT * FROM capitals", (err, res) => {
   if (err) {
