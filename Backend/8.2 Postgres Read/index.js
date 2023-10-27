@@ -33,7 +33,6 @@ app.use(express.static("public"));
 
 let currentQuestion = {};
 
-
 // GET home page
 app.get("/", (req, res) => {
   totalCorrect = 0;
