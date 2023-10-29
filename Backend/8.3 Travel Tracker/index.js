@@ -16,9 +16,10 @@ const db = new pg.Client({
 });
 
 db.connect();
-const countries = [];
+let countries = [];
+let numberVisited = 0;
 
-db.query("SELECT * FROM visited_countries", (err, res) => {
+db.query("SELECT country_code FROM visited_countries",async (err, res) => {
   if (err) {
     console.error("Error executing query", err.stack);
   } else {
@@ -29,7 +30,19 @@ db.query("SELECT * FROM visited_countries", (err, res) => {
 });
 
 app.get("/", async (req, res) => {
+  console.log("countries visited: ", countries);
+  numberVisited = countries.length;
+  console.log(numberVisited);
+
   //Write your code here.
+  const countryArray = [];
+  countries.forEach((country) => countryArray.push(country.country_code));
+  console.log(countryArray)
+
+  res.render("index.ejs", {
+    total: numberVisited,
+    countries: countryArray,
+  });
 });
 
 app.listen(port, () => {
