@@ -32,12 +32,10 @@ db.query("SELECT country_code FROM visited_countries",async (err, res) => {
 app.get("/", async (req, res) => {
   console.log("countries visited: ", countries);
   numberVisited = countries.length;
-  console.log(numberVisited);
 
   //Write your code here.
   const countryArray = [];
   countries.forEach((country) => countryArray.push(country.country_code));
-  console.log(countryArray)
 
   res.render("index.ejs", {
     total: numberVisited,
