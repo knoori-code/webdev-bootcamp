@@ -45,8 +45,8 @@ app.post("/add", async (req, res) => {
   let countryCode;
   try {
     result = await db.query(
-      "SELECT country_code FROM countries WHERE country_name = $1",
-      [countryName]
+      "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%';",
+      [countryName.toLowerCase()]
     );
 
     const countryCodeObject = result.rows[0];
@@ -62,7 +62,7 @@ app.post("/add", async (req, res) => {
     });
     return;
   }
-  
+
   try {
     await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
       countryCode,
