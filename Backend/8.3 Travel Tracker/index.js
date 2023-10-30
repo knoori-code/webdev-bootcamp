@@ -16,38 +16,39 @@ const db = new pg.Client({
 });
 
 db.connect();
-let countries = [];
-let numberVisited = 0;
 
-db.query("SELECT country_code FROM visited_countries",async (err, res) => {
-  if (err) {
-    console.error("Error executing query", err.stack);
-  } else {
-    countries = res.rows;
-  }
-
-  db.end();
-});
-
-app.get("/", async (req, res) => {
-  console.log("countries visited: ", countries);
-  numberVisited = countries.length;
-
-  //Write your code here.
-  const countryArray = [];
-  countries.forEach((country) => countryArray.push(country.country_code));
-
-  res.render("index.ejs", {
-    total: numberVisited,
-    countries: countryArray,
+app.get("/", (req, res) => {
+  let countries = [];
+  db.query("SELECT country_code FROM visited_countries", (err, result) => {
+    if (err) {
+      console.error("Error executing query", err.stack);
+    } else {
+      countries = result.rows;
+    }
+    console.log("countries visited: ", countries);
+    let numberVisited = countries.length;
+  
+    //Write your code here.
+    const countryArray = [];
+    countries.forEach((country) => countryArray.push(country.country_code));
+  
+    res.render("index.ejs", {
+      total: numberVisited,
+      countries: countryArray,
+    });
   });
+
 });
 
 app.post("/add", async (req, res) => {
   const countryName = req.body.country;
   const result = await db.query("SELECT country_code FROM countries WHERE country_name = $1", [countryName]);
   const countryCodeArray = result.rows; 
-  await db.query("")
+  console.log(countryCodeArray)
+
+  await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [countryCodeArray[0].country_code]);
+  res.redirect("/")
+
 })
 
 app.listen(port, () => {
