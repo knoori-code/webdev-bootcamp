@@ -52,6 +52,7 @@ app.post("/add", async (req, res) => {
     const countryCodeObject = result.rows[0];
     countryCode = countryCodeObject.country_code;
   } catch (error) {
+    console.log(error);
     console.log("Rendering with error");
     const countryArray = await checkVisited();
     res.render("index.ejs", {
@@ -61,13 +62,14 @@ app.post("/add", async (req, res) => {
     });
     return;
   }
-
+  
   try {
     await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
       countryCode,
     ]);
     res.redirect("/");
   } catch (error) {
+    console.log(error);
     const countryArray = await checkVisited();
     res.render("index.ejs", {
       total: countryArray.length,
