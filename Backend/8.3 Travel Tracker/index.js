@@ -76,26 +76,6 @@ app.post("/add", async (req, res) => {
     });
     return;
   }
-
-  // if (result.rows.length !== 0) {
-  //   const countryCodeArray = result.rows;
-  //   const countryCode = countryCodeArray[0].country_code;
-  //   console.log(countryCodeArray);
-
-  //   try {
-  //     await db.query(
-  //       "INSERT INTO visited_countries (country_code) VALUES ($1)",
-  //       [countryCode]
-  //     );
-  //   } catch (error) {
-  //     const countryArray = await checkVisited();
-  //     res.render("index.ejs", {
-  //       total: countryArray.length,
-  //       countries: countryArray,
-  //       error: "Country name already exists. Please try again",
-  //     });
-  //   }
-  // }
 });
 
 app.listen(port, () => {
