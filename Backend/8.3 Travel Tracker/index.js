@@ -41,28 +41,61 @@ app.get("/", async (req, res) => {
 app.post("/add", async (req, res) => {
   const countryName = req.body.country;
 
+  let result;
+  let countryCode;
   try {
-    const result = await db.query(
+    result = await db.query(
       "SELECT country_code FROM countries WHERE country_name = $1",
       [countryName]
     );
+
+    const countryCodeObject = result.rows[0];
+    countryCode = countryCodeObject.country_code;
+  } catch (error) {
+    console.log("Rendering with error");
+    const countryArray = await checkVisited();
+    res.render("index.ejs", {
+      total: countryArray.length,
+      countries: countryArray,
+      error: "Country name does not exist. Please try again",
+    });
+    return;
+  }
+
+  try {
+    await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
+      countryCode,
+    ]);
+    res.redirect("/");
   } catch (error) {
     const countryArray = await checkVisited();
     res.render("index.ejs", {
       total: countryArray.length,
       countries: countryArray,
-      error: "Country name does not exist. Please try again"
-    })
+      error: "Country name already exists. Please try again",
+    });
+    return;
   }
 
-  if (result.rows.length !== 0) {
-    const countryCodeArray = result.rows;
-    const countryCode = countryCodeArray[0].country_code;
-    console.log(countryCodeArray);
+  // if (result.rows.length !== 0) {
+  //   const countryCodeArray = result.rows;
+  //   const countryCode = countryCodeArray[0].country_code;
+  //   console.log(countryCodeArray);
 
-    await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [countryCode]);
-    res.redirect("/");
-  }
+  //   try {
+  //     await db.query(
+  //       "INSERT INTO visited_countries (country_code) VALUES ($1)",
+  //       [countryCode]
+  //     );
+  //   } catch (error) {
+  //     const countryArray = await checkVisited();
+  //     res.render("index.ejs", {
+  //       total: countryArray.length,
+  //       countries: countryArray,
+  //       error: "Country name already exists. Please try again",
+  //     });
+  //   }
+  // }
 });
 
 app.listen(port, () => {
