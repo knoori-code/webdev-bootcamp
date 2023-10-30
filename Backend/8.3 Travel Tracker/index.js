@@ -17,6 +17,10 @@ const db = new pg.Client({
 
 db.connect();
 
+async function checkVisited() {
+  
+}
+
 app.get("/", async (req, res) => {
   let countries = [];
   const result = await db.query("SELECT country_code FROM visited_countries");
@@ -37,10 +41,15 @@ app.get("/", async (req, res) => {
 
 app.post("/add", async (req, res) => {
   const countryName = req.body.country;
-  const result = await db.query(
+
+  try {
+    const result = await db.query(
     "SELECT country_code FROM countries WHERE country_name = $1",
-    [countryName]
-  );
+      [countryName]
+    );
+  } catch (error) {
+
+  }
 
   if (result.rows.length !== 0) {
     const countryCodeArray = result.rows;
