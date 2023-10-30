@@ -30,7 +30,7 @@ async function checkVisited() {
 }
 
 app.get("/", async (req, res) => {
-  const countryArray = checkVisited();
+  const countryArray = await checkVisited();
 
   res.render("index.ejs", {
     total: countryArray.length,
@@ -46,15 +46,21 @@ app.post("/add", async (req, res) => {
       "SELECT country_code FROM countries WHERE country_name = $1",
       [countryName]
     );
-  } catch (error) {}
+  } catch (error) {
+    const countryArray = await checkVisited();
+    res.render("index.ejs", {
+      total: countryArray.length,
+      countries: countryArray,
+      error: "Country name does not exist. Please try again"
+    })
+  }
 
   if (result.rows.length !== 0) {
     const countryCodeArray = result.rows;
+    const countryCode = countryCodeArray[0].country_code;
     console.log(countryCodeArray);
 
-    await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
-      countryCodeArray[0].country_code,
-    ]);
+    await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [countryCode]);
     res.redirect("/");
   }
 });
