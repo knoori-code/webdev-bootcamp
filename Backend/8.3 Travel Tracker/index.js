@@ -17,27 +17,22 @@ const db = new pg.Client({
 
 db.connect();
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   let countries = [];
-  db.query("SELECT country_code FROM visited_countries", (err, result) => {
-    if (err) {
-      console.error("Error executing query", err.stack);
-    } else {
-      countries = result.rows;
-    }
-    console.log("countries visited: ", countries);
-    let numberVisited = countries.length;
+  const result = await db.query("SELECT country_code FROM visited_countries")
+  countries = result.rows;
   
-    //Write your code here.
-    const countryArray = [];
-    countries.forEach((country) => countryArray.push(country.country_code));
+  console.log("countries visited: ", countries);
+  let numberVisited = countries.length;
   
-    res.render("index.ejs", {
-      total: numberVisited,
-      countries: countryArray,
-    });
+  //Write your code here.
+  const countryArray = [];
+  countries.forEach((country) => countryArray.push(country.country_code));
+  
+  res.render("index.ejs", {
+    total: numberVisited,
+    countries: countryArray,
   });
-
 });
 
 app.post("/add", async (req, res) => {
