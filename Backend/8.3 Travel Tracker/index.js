@@ -43,6 +43,13 @@ app.get("/", async (req, res) => {
   });
 });
 
+app.post("/add", async (req, res) => {
+  const countryName = req.body.country;
+  const result = await db.query("SELECT country_code FROM countries WHERE country_name = $1", [countryName]);
+  const countryCodeArray = result.rows; 
+  await db.query("")
+})
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
