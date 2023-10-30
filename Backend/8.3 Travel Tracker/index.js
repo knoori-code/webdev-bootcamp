@@ -41,13 +41,16 @@ app.post("/add", async (req, res) => {
     "SELECT country_code FROM countries WHERE country_name = $1",
     [countryName]
   );
-  const countryCodeArray = result.rows;
-  console.log(countryCodeArray);
 
-  await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
-    countryCodeArray[0].country_code,
-  ]);
-  res.redirect("/");
+  if (result.rows.length !== 0) {
+    const countryCodeArray = result.rows;
+    console.log(countryCodeArray);
+  
+    await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
+      countryCodeArray[0].country_code,
+    ]);
+    res.redirect("/");
+  }
 });
 
 app.listen(port, () => {
