@@ -18,23 +18,22 @@ const db = new pg.Client({
 db.connect();
 
 async function checkVisited() {
-  
-}
-
-app.get("/", async (req, res) => {
   let countries = [];
   const result = await db.query("SELECT country_code FROM visited_countries");
   countries = result.rows;
-
   console.log("countries visited: ", countries);
-  let numberVisited = countries.length;
 
-  //Write your code here.
   const countryArray = [];
   countries.forEach((country) => countryArray.push(country.country_code));
 
+  return countryArray;
+}
+
+app.get("/", async (req, res) => {
+  const countryArray = checkVisited();
+
   res.render("index.ejs", {
-    total: numberVisited,
+    total: countryArray.length,
     countries: countryArray,
   });
 });
@@ -44,17 +43,15 @@ app.post("/add", async (req, res) => {
 
   try {
     const result = await db.query(
-    "SELECT country_code FROM countries WHERE country_name = $1",
+      "SELECT country_code FROM countries WHERE country_name = $1",
       [countryName]
     );
-  } catch (error) {
-
-  }
+  } catch (error) {}
 
   if (result.rows.length !== 0) {
     const countryCodeArray = result.rows;
     console.log(countryCodeArray);
-  
+
     await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
       countryCodeArray[0].country_code,
     ]);
