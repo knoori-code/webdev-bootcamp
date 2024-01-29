@@ -20,6 +20,7 @@ db.query("SELECT * FROM flags", (err, res) => {
     console.error("Error executing query", err.stack);
   } else {
     quiz = res.rows;
+    console.log(quiz)
   }
 
   db.end();
