@@ -21,8 +21,15 @@ app.get("/", async (req, res) => {
   //Write your code here.
 
   try {
+    let countryArray = [];
     const result = await db.query("SELECT * FROM countries");
-    console.log(result);
+    console.log(result.rows);
+
+    result.forEach((country) => {
+      countryArray.push(country.country_code);
+    });
+
+    res.render("index.ejs", { countries: countryArray });
   } catch (error) {
     console.error("Error executing query", err.stack);
   }
