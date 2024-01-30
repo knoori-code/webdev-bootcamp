@@ -34,6 +34,8 @@ app.get("/", async (req, res) => {
   } catch (err) {
     console.error("Error executing query", err.stack);
   }
+
+  db.end();
 });
 
 app.listen(port, () => {
