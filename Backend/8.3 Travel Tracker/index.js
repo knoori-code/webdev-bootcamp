@@ -19,10 +19,10 @@ app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
   //Write your code here.
-
+  
   try {
     let countryArray = [];
-    const result = await db.query("SELECT * FROM visited_countries");
+    const result = await db.query("SELECT * FROM visited_countries;");
     console.log(result.rows);
 
     result.rows.forEach((country) => {
@@ -35,8 +35,29 @@ app.get("/", async (req, res) => {
     console.error("Error executing query", err.stack);
   }
 
-  db.end();
+  // db.end();
 });
+
+app.post("/add", async (req, res) => {
+  
+  try {
+    const country = req.body.country.toLowerCase().trim();
+    const result = await db.query("SELECT country_code FROM countries WHERE LOWER(country_name) = $1;", [country]); // convert country_name column to lowercase
+    const countryCode = result.rows[0].country_code;
+    console.log(countryCode);
+
+    try {
+      await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [countryCode]);
+      res.redirect("/")
+    } catch (err) {
+      console.error("Error executing query", err.stack);
+    }
+
+  } catch (err) {
+    console.error("Error executing query", err.stack);
+  }
+
+})
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
