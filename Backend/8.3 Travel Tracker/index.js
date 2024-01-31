@@ -17,10 +17,13 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+const visitedCountries = () => {
+
+}
+
 app.get("/", async (req, res) => {
   //Write your code here.
   
-  try {
     let countryArray = [];
     const result = await db.query("SELECT * FROM visited_countries;");
     console.log(result.rows);
@@ -29,11 +32,7 @@ app.get("/", async (req, res) => {
       countryArray.push(country.country_code);
     });
 
-    console.log(countryArray);
     res.render("index.ejs", { countries: countryArray, total: countryArray.length });
-  } catch (err) {
-    console.error("Error executing query", err.stack);
-  }
 
 });
 
@@ -54,7 +53,6 @@ app.post("/add", async (req, res) => {
 
   } catch (err) {
     console.error("Country name does not exist. Try again.", err.stack);
-    res.render("index.ejs", {})
   }
 
 })
