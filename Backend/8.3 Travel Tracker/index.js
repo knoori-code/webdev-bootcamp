@@ -44,7 +44,6 @@ app.post("/add", async (req, res) => {
     const country = req.body.country.toLowerCase().trim();
     const result = await db.query("SELECT country_code FROM countries WHERE LOWER(country_name) = $1;", [country]); // convert country_name column to lowercase
     const countryCode = result.rows[0].country_code;
-    console.log(countryCode);
 
     try {
       await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [countryCode]);
@@ -55,6 +54,8 @@ app.post("/add", async (req, res) => {
 
   } catch (err) {
     console.error("Country name does not exist. Try again.", err.stack);
+    const countryArray = await visitedCountries();
+    res.render("index.ejs", { countries: countryArray, total: countryArray.length, error: "Country name does not exist. Try again." });
   }
 
 })
