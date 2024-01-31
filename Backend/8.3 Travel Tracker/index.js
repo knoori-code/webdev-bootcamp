@@ -17,22 +17,24 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const visitedCountries = () => {
+const visitedCountries = async () => {
+  
+  let countryArray = [];
+  const result = await db.query("SELECT * FROM visited_countries;");
+  console.log(result.rows);
+  
+  result.rows.forEach((country) => {
+    countryArray.push(country.country_code);
+  });
+
+  return countryArray;
 
 }
 
 app.get("/", async (req, res) => {
   //Write your code here.
-  
-    let countryArray = [];
-    const result = await db.query("SELECT * FROM visited_countries;");
-    console.log(result.rows);
-
-    result.rows.forEach((country) => {
-      countryArray.push(country.country_code);
-    });
-
-    res.render("index.ejs", { countries: countryArray, total: countryArray.length });
+  const countryArray = await visitedCountries();
+  res.render("index.ejs", { countries: countryArray, total: countryArray.length });
 
 });
 
