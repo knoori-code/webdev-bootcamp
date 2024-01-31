@@ -39,6 +39,7 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/add", async (req, res) => {
+  const countryArray = await visitedCountries();
   
   try {
     const country = req.body.country.toLowerCase().trim();
@@ -50,11 +51,11 @@ app.post("/add", async (req, res) => {
       res.redirect("/")
     } catch (err) {
       console.error("The country has already been visited. Try again.", err.stack);
+      res.render("index.ejs", { countries: countryArray, total: countryArray.length, error: "The country has already been visited. Try again" });
     }
 
   } catch (err) {
     console.error("Country name does not exist. Try again.", err.stack);
-    const countryArray = await visitedCountries();
     res.render("index.ejs", { countries: countryArray, total: countryArray.length, error: "Country name does not exist. Try again." });
   }
 
