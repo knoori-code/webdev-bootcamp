@@ -35,7 +35,6 @@ app.get("/", async (req, res) => {
     console.error("Error executing query", err.stack);
   }
 
-  // db.end();
 });
 
 app.post("/add", async (req, res) => {
@@ -55,6 +54,7 @@ app.post("/add", async (req, res) => {
 
   } catch (err) {
     console.error("Country name does not exist. Try again.", err.stack);
+    res.render("index.ejs", {})
   }
 
 })
