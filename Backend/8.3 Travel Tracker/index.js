@@ -50,11 +50,11 @@ app.post("/add", async (req, res) => {
       await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [countryCode]);
       res.redirect("/")
     } catch (err) {
-      console.error("Error executing query", err.stack);
+      console.error("The country has already been visited. Try again.", err.stack);
     }
 
   } catch (err) {
-    console.error("Error executing query", err.stack);
+    console.error("Country name does not exist. Try again.", err.stack);
   }
 
 })
