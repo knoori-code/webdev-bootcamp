@@ -31,13 +31,20 @@ async function checkVisisted() {
   });
   return countries;
 }
+
+async function getUsers() {
+  let users = []
+  const usersResult = await db.query("SELECT * FROM users;");
+  usersResult.rows.forEach(user => users.push(user));
+  return users;
+}
+
 app.get("/", async (req, res) => {
   const countries = await checkVisisted();
   const colorResult = await db.query("SELECT color FROM users WHERE id = $1;", [currentUserId]);
   const color = colorResult.rows[0].color;
-  const usersResult = await db.query("SELECT * FROM users;");
-  const users = []
-  usersResult.rows.forEach(user => users.push(user))
+
+  const users = await getUsers();
 
   res.render("index.ejs", {
     countries: countries,
