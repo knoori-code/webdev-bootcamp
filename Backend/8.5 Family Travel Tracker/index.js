@@ -18,11 +18,6 @@ app.use(express.static("public"));
 
 let currentUserId = 1;
 
-// let users = [
-//   { id: 1, name: "Angela", color: "teal" },
-//   { id: 2, name: "Jack", color: "powderblue" },
-// ];
-
 async function checkVisisted() {
   const result = await db.query("SELECT country_code FROM visited_countries WHERE user_id = $1", [currentUserId]);
   let countries = [];
@@ -66,7 +61,7 @@ app.post("/add", async (req, res) => {
 
   try {
     const result = await db.query(
-      "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' $1 || '%';",
+      "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%';",
       [input.toLowerCase()]
     );
 
@@ -81,16 +76,21 @@ app.post("/add", async (req, res) => {
       res.redirect("/");
     } catch (err) {
       console.log(err);
-      res.redirect("/");
+      // res.redirect("/");
     }
   } catch (err) {
-    console.log(err);
-    res.redirect("/");
+    console.log(err)
+    // res.redirect("/");
   }
 });
 app.post("/user", async (req, res) => {
+  const newValue = req.body.add;
+  if (newValue) {
+    return res.render(`${newValue}.ejs`);
+  }
+
   currentUserId = parseInt(req.body.user);
-  res.redirect("/");
+  return res.redirect("/");
 });
 
 app.post("/new", async (req, res) => {
