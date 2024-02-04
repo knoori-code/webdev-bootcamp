@@ -84,7 +84,7 @@ app.post("/add", async (req, res) => {
 app.post("/user", async (req, res) => {
   const newValue = req.body.add;
   if (newValue) {
-    return res.render(`${newValue}.ejs`);
+    return res.render("new.ejs");
   }
 
   currentUserId = parseInt(req.body.user);
@@ -94,6 +94,12 @@ app.post("/user", async (req, res) => {
 app.post("/new", async (req, res) => {
   //Hint: The RETURNING keyword can return the data that was inserted.
   //https://www.postgresql.org/docs/current/dml-returning.html
+
+  const userName = req.body.name;
+  const userColor = req.body.color;
+
+  db.query("INSERT INTO users (name, color) VALUES ($1, $2);", [userName, userColor]);
+  res.redirect("/");
 });
 
 app.listen(port, () => {
