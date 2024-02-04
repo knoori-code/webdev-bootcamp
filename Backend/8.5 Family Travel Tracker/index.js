@@ -39,11 +39,15 @@ async function getUsers() {
   return users;
 }
 
-app.get("/", async (req, res) => {
-  const countries = await checkVisisted();
+async function getColor() {
   const colorResult = await db.query("SELECT color FROM users WHERE id = $1;", [currentUserId]);
   const color = colorResult.rows[0].color;
+  return color;
+}
 
+app.get("/", async (req, res) => {
+  const countries = await checkVisisted();
+  const color = await getColor();
   const users = await getUsers();
 
   res.render("index.ejs", {
