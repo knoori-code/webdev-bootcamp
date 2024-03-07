@@ -1,4 +1,5 @@
 import React from "react";
+import Avatar from "./Avatar";
 
 function Card(props) {
   return (
