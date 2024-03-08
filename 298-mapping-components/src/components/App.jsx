@@ -6,6 +6,8 @@ function App() {
   const cardArray = contacts.map((contactObj) => {
     return (
       <Card
+        key={contactObj.id}
+        id={contactObj.id}
         name={contactObj.name}
         img={contactObj.imgURL}
         tel={contactObj.phone}
