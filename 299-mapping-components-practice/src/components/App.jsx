@@ -1,7 +1,12 @@
 import React from "react";
 import Entry from "./Entry";
+import emojipedia from "../emojipedia";
 
 function App() {
+  const entryArray = emojipedia.map(() => {
+    <Entry />
+  })
+
   return (
     <div>
       <h1>
@@ -9,7 +14,7 @@ function App() {
       </h1>
 
       <dl className="dictionary">
-        <Entry />
+
       </dl>
     </div>
   );
