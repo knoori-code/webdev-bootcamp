@@ -4,7 +4,14 @@ import emojipedia from "../emojipedia";
 
 function App() {
   const entryArray = emojipedia.map((emoji) => {
-    <Entry key={emoji.id} name={emoji.name} meaning={emoji.meaning} />;
+    return (
+      <Entry
+        key={emoji.id}
+        name={emoji.name}
+        meaning={emoji.meaning}
+        emoji={emoji.emoji}
+      />
+    );
   });
 
   return (
@@ -12,8 +19,9 @@ function App() {
       <h1>
         <span>emojipedia</span>
       </h1>
+      <dl className="dictionary">
       {entryArray}
-      <dl className="dictionary"></dl>
+      </dl>
     </div>
   );
 }
