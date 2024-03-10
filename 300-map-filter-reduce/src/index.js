@@ -15,7 +15,7 @@ const sum = numbers.reduce((accumulator, currentValue) => {
   return accumulator + currentValue;
 }, 100)
 
-console.log(sum)gi
+console.log(sum)
 
 //Find - find the first item that matches from an array.
 
