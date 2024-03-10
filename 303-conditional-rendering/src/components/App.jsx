@@ -15,7 +15,7 @@ function renderConditionally() {
 }
 
 function App() {
-  return <div className="container">{renderConditionally}</div>;
+  return <div className="container">{renderConditionally()}</div>;
 }
 
 export default App;
