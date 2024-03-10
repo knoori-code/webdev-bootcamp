@@ -1,16 +1,12 @@
 import React from "react";
-import { render } from "react-dom";
+import Login from "./Login"
 
 const isLoggedIn = true;
 
 function renderConditionally() {
   if (isLoggedIn === true) return <h1>Hello</h1>;
   return (
-    <form className="form">
-      <input type="text" placeholder="Username" />
-      <input type="password" placeholder="Password" />
-      <button type="submit">Login</button>
-    </form>
+    <Login />
   );
 }
 
