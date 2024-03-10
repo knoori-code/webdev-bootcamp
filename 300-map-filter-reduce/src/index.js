@@ -13,10 +13,12 @@ const filteredList = numbers.filter((number) => {
 //Reduce - Accumulate a value by doing something to each item in an array.
 const sum = numbers.reduce((accumulator, currentValue) => {
   return accumulator + currentValue;
-}, 100)
-
-console.log(sum)
+}, 100);
 
 //Find - find the first item that matches from an array.
+const foundNumber = numbers.find((number) => {
+  return number > 40;
+});
 
+console.log(foundNumber);
 //FindIndex - find the index of the first item that matches.
