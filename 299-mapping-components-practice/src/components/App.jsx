@@ -3,19 +3,17 @@ import Entry from "./Entry";
 import emojipedia from "../emojipedia";
 
 function App() {
-  const entryArray = emojipedia.map(() => {
-    <Entry />
-  })
+  const entryArray = emojipedia.map((emoji) => {
+    <Entry key={emoji.id} name={emoji.name} meaning={emoji.meaning} />;
+  });
 
   return (
     <div>
       <h1>
         <span>emojipedia</span>
       </h1>
-
-      <dl className="dictionary">
-
-      </dl>
+      {entryArray}
+      <dl className="dictionary"></dl>
     </div>
   );
 }
