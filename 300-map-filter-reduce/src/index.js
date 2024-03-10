@@ -20,5 +20,9 @@ const foundNumber = numbers.find((number) => {
   return number > 40;
 });
 
-console.log(foundNumber);
 //FindIndex - find the index of the first item that matches.
+const index = numbers.findIndex((number) => {
+  return number === 48;
+});
+
+console.log(index);
