@@ -20,3 +20,5 @@ console.log(time);
 //   console.log("Hey");
 // }
 // setInterval(sayHi, 1000);
+
+export default time;
