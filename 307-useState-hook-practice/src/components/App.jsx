@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="container">
       <h1>{currentTime}</h1>
-      <button>Get Time</button>
+      <button onClick={() => setCurrentTime(new Date().toLocaleTimeString())} >Get Time</button>
     </div>
   );
 }
