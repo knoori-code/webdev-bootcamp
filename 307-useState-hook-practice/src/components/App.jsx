@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
 function App() {
-  let time = new Date().toLocaleTimeString();
-  const [currentTime, setCurrentTime] = useState(time);
+  let now = new Date().toLocaleTimeString();
+  const [time, setTime] = useState(now);
 
   setInterval(() => {
-    setCurrentTime(new Date().toLocaleTimeString());
+    setTime(new Date().toLocaleTimeString());
   }, 1000);
 
   return (
     <div className="container">
-      <h1>{currentTime}</h1>
-      <button onClick={() => setCurrentTime(new Date().toLocaleTimeString())}>
+      <h1>{time}</h1>
+      <button onClick={() => setTime(new Date().toLocaleTimeString())}>
         Get Time
       </button>
     </div>
