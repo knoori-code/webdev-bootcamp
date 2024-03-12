@@ -1,12 +1,19 @@
 // CHALLENGE: uncomment the code below and see the car stats rendered
 import React from "react";
 import ReactDOM from "react-dom";
+import cars from "./practice";
+
+const [honda, tesla] = cars;
+
+const {speedStats: { topSpeed: teslaTopSpeed }, coloursByPopularity: [teslaTopColour]} = tesla;
+const {speedStats: {topSpeed: hondaTopSpeed}, coloursByPopularity: [hondaTopColour]} = honda;
 
 ReactDOM.render(
   <table>
     <tr>
       <th>Brand</th>
       <th>Top Speed</th>
+      <th>Colour</th>
     </tr>
     <tr>
       <td>{tesla.model}</td>
