@@ -14,7 +14,7 @@ function App() {
 
   function handleMouseOut() {
     setButtonColour("white")
-  }
+  } 
 
   return (
     <div className="container">
