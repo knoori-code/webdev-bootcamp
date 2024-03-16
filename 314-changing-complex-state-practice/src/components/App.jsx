@@ -7,6 +7,10 @@ function App() {
     email: ""
   });
 
+  function handleFName(event) {
+
+  }
+
   return (
     <div className="container">
       <h1>
@@ -14,9 +18,9 @@ function App() {
       </h1>
       <p>{contact.email}</p>
       <form>
-        <input name="fName" placeholder="First Name" />
-        <input name="lName" placeholder="Last Name" />
-        <input name="email" placeholder="Email" />
+        <input name="fName" placeholder="First Name" onChange={handleFName} />
+        <input name="lName" placeholder="Last Name" onChange={handleFName} />
+        <input name="email" placeholder="Email" onChange={handleFName} />
         <button>Submit</button>
       </form>
     </div>
