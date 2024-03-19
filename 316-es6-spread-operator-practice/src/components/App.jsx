@@ -19,10 +19,10 @@ function App() {
 
   function handleClick() {
     setState((prev) => {
-      prev.taskList.push(prev.task);
 
       return {
-        ...prev
+        ...prev,
+        taskList: [...prev.taskList, prev.task]
       }
     })
   }
