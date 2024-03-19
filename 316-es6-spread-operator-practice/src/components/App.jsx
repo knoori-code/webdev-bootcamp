@@ -25,6 +25,13 @@ function App() {
         taskList: [...prev.taskList, prev.task]
       }
     })
+
+    setState((prev) => {
+      return {
+        ...prev,
+        task: ""
+      }
+    })
   }
 
   return (
