@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 function App() {
-  const [task, setTask] = useState("");
+  const [state, setState] = useState({
+    task: "",
+    taskList: [],
+  });
 
   function handleChange(event) {
     const { value } = event.target;
-    
-    setTask(value);
   }
 
   return (
