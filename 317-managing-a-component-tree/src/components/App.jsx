@@ -4,6 +4,7 @@ import ToDoItem from "./ToDoItem";
 function App() {
   const [inputText, setInputText] = useState("");
   const [items, setItems] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
 
   function handleChange(event) {
     const newValue = event.target.value;
@@ -31,7 +32,11 @@ function App() {
       <div>
         <ul>
           {items.map((todoItem) => (
-            <ToDoItem item={todoItem} />
+            <ToDoItem
+              item={todoItem}
+              setIsClicked={setIsClicked}
+              isClicked={isClicked}
+            />
           ))}
         </ul>
       </div>

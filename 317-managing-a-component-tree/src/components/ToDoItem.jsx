@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 function ToDoItem(props) {
-  const [isClicked, setIsClicked] = useState(false);
+  const setIsClicked = props.setIsClicked;
+  const isClicked = props.isClicked;
 
   function handleClick() {
     setIsClicked((prev) => {
