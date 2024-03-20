@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 function ToDoItem(props) {
-  return <li>{props.item}</li>;
+  const [isClicked, setIsClicked] = useState(false);
+
+  function handleClick() {
+    setIsClicked((prev) => {
+      return prev ? false : true;
+    });
+  }
+
+  return (
+    <li
+      style={{ textDecoration: isClicked ? "line-through" : null }}
+      onClick={handleClick}
+    >
+      {props.item}
+    </li>
+  );
 }
 
 export default ToDoItem;
