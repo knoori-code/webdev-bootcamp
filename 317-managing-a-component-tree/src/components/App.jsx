@@ -34,8 +34,6 @@ function App() {
           {items.map((todoItem) => (
             <ToDoItem
               item={todoItem}
-              setIsClicked={setIsClicked}
-              isClicked={isClicked}
             />
           ))}
         </ul>
