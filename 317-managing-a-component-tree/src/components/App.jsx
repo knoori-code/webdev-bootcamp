@@ -4,7 +4,6 @@ import ToDoItem from "./ToDoItem";
 function App() {
   const [inputText, setInputText] = useState("");
   const [items, setItems] = useState([]);
-  const [isClicked, setIsClicked] = useState(false);
 
   function handleChange(event) {
     const newValue = event.target.value;
