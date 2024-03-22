@@ -17,6 +17,10 @@ function App() {
     setInputText("");
   }
 
+  function deleteItem() {
+
+  }
+
   return (
     <div className="container">
       <div className="heading">
@@ -33,6 +37,7 @@ function App() {
           {items.map((todoItem) => (
             <ToDoItem
               item={todoItem}
+              onChecked={deleteItem}
             />
           ))}
         </ul>
