@@ -4,7 +4,7 @@ function ToDoItem(props) {
 
   return (
     <li
-      onClick={props.onChecked}
+      onClick={() => props.onChecked(props.id)}
     >
       {props.item}
     </li>
