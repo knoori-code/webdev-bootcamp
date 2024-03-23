@@ -31,7 +31,7 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <InputArea onType={handleChange} onButtonClick={addItem} />
+      <InputArea onType={handleChange} onButtonClick={addItem} text={inputText} />
       <div>
         <ul>
           {items.map((todoItem, index) => (
