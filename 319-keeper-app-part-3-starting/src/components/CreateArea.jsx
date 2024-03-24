@@ -29,7 +29,7 @@ function CreateArea(props) {
           onChange={handleChange}
           value={newNote.content}
         />
-        <button onClick={props.onAdd} >Add</button>
+        <button onClick={() => props.onAdd(newNote)} >Add</button>
       </form>
     </div>
   );
