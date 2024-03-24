@@ -5,10 +5,12 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
+  const { notes, setNotes } = useState([]);
+
   return (
     <div>
       <Header />
-      <CreateArea />
+      <CreateArea />T
       <Note key={1} title="Note title" content="Note content" />
       <Footer />
     </div>
