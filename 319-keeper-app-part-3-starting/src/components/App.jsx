@@ -13,8 +13,12 @@ function App() {
     });
   }
 
-  function handleClick(index) {
-
+  function handleClick(id) {
+    setNotes((prev) => {
+      return prev.filter((prevNote, index) => {
+        return id !== index
+      })
+    })
   }
 
   return (
