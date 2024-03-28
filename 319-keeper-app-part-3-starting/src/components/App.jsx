@@ -16,9 +16,9 @@ function App() {
   function handleClick(id) {
     setNotes((prev) => {
       return prev.filter((prevNote, index) => {
-        return id !== index
-      })
-    })
+        return id !== index;
+      });
+    });
   }
 
   return (
@@ -26,7 +26,15 @@ function App() {
       <Header />
       <CreateArea onAdd={addNote} />
       {notes.map((note, index) => {
-        return <Note key={index} id={index} title={note.title} content={note.content} onDelete={handleClick} />;
+        return (
+          <Note
+            key={index}
+            id={index}
+            title={note.title}
+            content={note.content}
+            onDelete={handleClick}
+          />
+        );
       })}
 
       <Footer />
